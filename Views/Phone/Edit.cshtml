@@ -1,0 +1,46 @@
+﻿@model PhoneList
+
+<form  method="post" asp-action="Edit">
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-black-50">Edit Contact</h2>
+            <hr />
+        </div>
+        <div asp-validation-summary="All"></div>
+        <div class="mb-3">
+            <label asp-for="FirstName"></label>
+            <input asp-for="FirstName" class="form-control" />
+            <span asp-validation-for ="FirstName" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="LastName"></label>
+            <input asp-for="LastName" class="form-control" />
+            <span asp-validation-for="LastName" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Email"></label>
+            <input asp-for="Email" class="form-control" />
+        </div>
+        <div class="mb-3">
+            @for (int i = 0; i< Model.Numbers.Count; i++)
+            {
+                <div class="mb-2">
+                    <label asp-for="@Model.Numbers[i].Label">Label</label>
+                    <input asp-for="@Model.Numbers[i].Label" class="form-control" placeholder="e.g. Home, Work" />
+                </div>
+                <div class="mb-2">
+                    <label asp-for="@Model.Numbers[i].Number">Number</label>
+                    <input asp-for="@Model.Numbers[i].Number" class="form-control" placeholder="Enter phone number" />
+                    <span asp-validation-for="@Model.Numbers[i].Number" class="text-danger"></span>
+                </div>
+            }
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:150px">Edit</button>
+        <a asp-controller="Phone" asp-action="Index" class="btn btn-secondary" style="width:200px">Back to List</a>
+    </div>
+</form>
+@section Scripts{
+@{
+        <partial name="_ValidationScriptsPartial" />
+}
+}
